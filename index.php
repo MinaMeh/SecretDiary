@@ -32,7 +32,7 @@
 	<div class="row" >
 		<div class="col-md-6 offset-md-3" id="topTitle">
 			<h1> My Secret Diary</h1>
-			<p class="lead"> Your Secret Private Diary with wherever you go</p>
+			<p class="lead"> Your Secret Private Diary with you wherever you go</p>
       
       <p  class="bold margintop"> Intresseted? Sign Up below</p>
       <?php 
