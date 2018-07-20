@@ -1,36 +1,67 @@
- <?php 
-$error="";
-if (isset($_POST['submit'])){
-	if (!isset($_POST['email'])) $error.="Please enter your email </br>";
-	else if (!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))  $error="Please enter a valide email address </br>";
-	if (!isset($_POST["password"])) $error.="Please enter your password </br>";
-	else {
-		if (strlen($_POST["password"])<8) $error.="Please enter a password of at least 8 characters </br>";
-			if (!preg_match("`[A-Z]`", $_POST["password"])) $error.="Please include at least one capital letter </br>";
+<?php include("login.php"); ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title> My Secret Diary </title>
+	<meta charset="utf-8">
+	 <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-	}
-	if($error!="")
-	{
-		echo "there are errors in your sign up details:".$error;
-	}
-	else{
-		$connection=mysqli_connect("localhost","root","","SecretDiary");
-		$query="SELECT * FROM `users` WHERE `email`='".mysqli_real_escape_string($connection,$_POST['email'])."'";
-		$result= mysqli_query($connection,$query);
-		$results=mysqli_num_rows($result);
-		if ($results) echo "That e-mail addres is already registered.Do you want to login?";
-		else{
-			$query="INSERT INTO `users` (`email`,`password`) VALUES ('".mysqli_real_escape_string($connection,$_POST['email'])."','". md5(md5($_POST['email']).$_POST['password'])."')";
-			mysqli_query($connection,$query);
-			echo "You've been Signed up!";
-		}
-	}
-}
+  <script type="text/javascript" src="jquery.min.js"></script>
+ 
+  <script src="js/bootstrap.min.js"></script>
+  
+  <script type="text/javascript" src=""></script>
+</head>
+<body data-spy="scroll" data-target=".navbar-collapse">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">My Secret Diary</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+    <form method="post" class="form-inline my-2 my-lg-0">
+      <input name="loginemail" class="form-control mr-sm-2 navbar-right" type="text" placeholder="Email" value="<?php if (isset($_POST['email']))  echo addslashes($_POST['email']);?>">
+       <input name="loginpassword" class="form-control mr-sm-2 navbar-right" type="password" placeholder="password" value="<?php  if (isset($_POST['password'])) echo addslashes($_POST['password']);?>">
+      <input class="btn btn-success my-2 my-sm-0 navbar-right" type="submit" name="submit" value="Log In">Log in</input>
+    </form>
+  </div>
+</nav>
+<div id="home" class="part">
+	<div class="row" >
+		<div class="col-md-6 offset-md-3" id="topTitle">
+			<h1> My Secret Diary</h1>
+			<p class="lead"> Your Secret Private Diary with wherever you go</p>
+      
+      <p  class="bold margintop"> Intresseted? Sign Up below</p>
+      <?php 
+      	if ($error) {
+      		echo '<div class="alert alert-danger">'.addslashes($error).' </div>';
+      	}
+      	if ($success){
+      		echo '<div class="alert alert-success">'.$success.'.</div>';
+      	}
+       ?>
+      <form class="margintop" method="post">
+        <div class="form-group">
+          <label  for="email"> Email address</label>
+         <input class="form-control" type="email" name="email" id="email" placeholder="Your Email" value="<?php if (isset($_POST['email']))  echo addslashes($_POST['email']);?>">
 
- ?>
- <form method="post">
- 	<input type="email" name="email" id="email">
- 	<input type="password" name="password" id="password">
- 	<input type="submit" name="submit" value="Sign Up">
- </form>
+        </div>
+        <div class="form-group">
+          <label for="password"> Your password</label>
+         <input class="form-control" type="password" name="password" id="password" placeholder="Your Password" value="<?php  if (isset($_POST['password'])) echo addslashes($_POST['password']);?>">
+
+        </div>
+        <input class="btn btn-success  btn-lg" type="submit" name="submit" value="Sign Up"></input>
+      </form>
+		</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript">
+	$(".part").css("min-height",$(window).height());
+</script>
+</html>

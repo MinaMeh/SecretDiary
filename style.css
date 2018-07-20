@@ -1,0 +1,51 @@
+
+#home{
+	background-image: url("images/landscape.jpg") ;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 550px;
+	opacity: 0.8;
+	width: 100%;
+}
+#topTitle{
+	margin-top: 100px;
+	text-align: center;
+	
+}
+
+#topTitle h1{
+	font-size: 300%;
+}
+.bold{
+	font-weight: bold;
+}
+.margintop{
+	margin-top: 30px;
+}
+.center{
+	text-align: center;
+}
+.title{
+	margin-top: 100px;
+	font-size: 200%; 
+}
+#about {
+	background-color: #C2C2C2;
+}
+#footer{
+	background-color: #E2DFDF;
+}
+body{
+	position: relative;
+}
+label{
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: left;
+}
+#white{
+	color: white;
+}
+#left{
+	float: right;
+}
